@@ -1,0 +1,82 @@
+package io.supermonkey.crawler.device.android;
+
+import io.supermonkey.crawler.hierarchy.Node;
+import io.supermonkey.crawler.hierarchy.Printer;
+import io.supermonkey.crawler.hierarchy.Selector;
+import org.junit.Test;
+import io.supermonkey.crawler.hierarchy.Element;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathFactory;
+import java.io.ByteArrayInputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @author Erik Nijkamp (erik.nijkamp@gmail.com)
+ * @since 30.05.14
+ */
+public class UiDumpXmlParserTest {
+
+	@Test
+	public void parse() throws Exception {
+		String uidump = "<?xml version='1.0' encoding='UTF-8' standalone='yes' ?><hierarchy rotation=\"0\"><node index=\"0\" text=\"\" resource-id=\"\" class=\"android.widget.FrameLayout\" package=\"com.android.keyguard\" content-desc=\"\" checkable=\"false\" checked=\"false\" clickable=\"false\" enabled=\"true\" focusable=\"false\" focused=\"false\" scrollable=\"false\" long-clickable=\"false\" password=\"false\" selected=\"false\" bounds=\"[0,0][1024,552]\"><node index=\"0\" text=\"\" resource-id=\"com.android.keyguard:id/keyguard_host_view\" class=\"android.widget.FrameLayout\" package=\"com.android.keyguard\" content-desc=\"\" checkable=\"false\" checked=\"false\" clickable=\"false\" enabled=\"true\" focusable=\"false\" focused=\"false\" scrollable=\"false\" long-clickable=\"false\" password=\"false\" selected=\"false\" bounds=\"[0,0][1024,552]\"><node index=\"0\" text=\"\" resource-id=\"com.android.keyguard:id/multi_pane_challenge\" class=\"android.view.View\" package=\"com.android.keyguard\" content-desc=\"\" checkable=\"false\" checked=\"false\" clickable=\"false\" enabled=\"true\" focusable=\"false\" focused=\"false\" scrollable=\"false\" long-clickable=\"false\" password=\"false\" selected=\"false\" bounds=\"[0,0][1024,552]\"><node index=\"0\" text=\"\" resource-id=\"com.android.keyguard:id/app_widget_container\" class=\"android.view.View\" package=\"com.android.keyguard\" content-desc=\"\" checkable=\"false\" checked=\"false\" clickable=\"false\" enabled=\"true\" focusable=\"false\" focused=\"false\" scrollable=\"false\" long-clickable=\"false\" password=\"false\" selected=\"false\" bounds=\"[0,0][1024,552]\"><node index=\"0\" text=\"\" resource-id=\"com.android.keyguard:id/keyguard_status_view\" class=\"android.widget.FrameLayout\" package=\"com.android.keyguard\" content-desc=\"Status widget.\" checkable=\"false\" checked=\"false\" clickable=\"false\" enabled=\"true\" focusable=\"false\" focused=\"false\" scrollable=\"false\" long-clickable=\"true\" password=\"false\" selected=\"false\" bounds=\"[67,74][497,504]\"><node index=\"0\" text=\"\" resource-id=\"com.android.keyguard:id/keyguard_status_view_face_palm\" class=\"android.widget.GridLayout\" package=\"com.android.keyguard\" content-desc=\"Status\" checkable=\"false\" checked=\"false\" clickable=\"false\" enabled=\"true\" focusable=\"false\" focused=\"false\" scrollable=\"false\" long-clickable=\"false\" password=\"false\" selected=\"false\" bounds=\"[75,82][489,496]\"><node index=\"0\" text=\"\" resource-id=\"\" class=\"android.widget.LinearLayout\" package=\"com.android.keyguard\" content-desc=\"\" checkable=\"false\" checked=\"false\" clickable=\"false\" enabled=\"true\" focusable=\"true\" focused=\"false\" scrollable=\"false\" long-clickable=\"false\" password=\"false\" selected=\"false\" bounds=\"[75,82][489,285]\"><node index=\"0\" text=\"\" resource-id=\"\" class=\"android.widget.LinearLayout\" package=\"com.android.keyguard\" content-desc=\"\" checkable=\"false\" checked=\"false\" clickable=\"false\" enabled=\"true\" focusable=\"false\" focused=\"false\" scrollable=\"false\" long-clickable=\"false\" password=\"false\" selected=\"false\" bounds=\"[75,263][489,285]\"><node index=\"0\" text=\"Mon, May 26\" resource-id=\"com.android.keyguard:id/date_view\" class=\"android.widget.TextView\" package=\"com.android.keyguard\" content-desc=\"\" checkable=\"false\" checked=\"false\" clickable=\"false\" enabled=\"true\" focusable=\"false\" focused=\"false\" scrollable=\"false\" long-clickable=\"false\" password=\"false\" selected=\"false\" bounds=\"[240,263][323,285]\" /></node><node index=\"1\" text=\"2:40\" resource-id=\"com.android.keyguard:id/clock_view\" class=\"android.widget.TextView\" package=\"com.android.keyguard\" content-desc=\"\" checkable=\"false\" checked=\"false\" clickable=\"false\" enabled=\"true\" focusable=\"false\" focused=\"false\" scrollable=\"false\" long-clickable=\"false\" password=\"false\" selected=\"false\" bounds=\"[154,82][410,270]\" /></node></node></node></node><node index=\"1\" text=\"\" resource-id=\"com.android.keyguard:id/keyguard_security_container\" class=\"android.widget.FrameLayout\" package=\"com.android.keyguard\" content-desc=\"\" checkable=\"false\" checked=\"false\" clickable=\"false\" enabled=\"true\" focusable=\"false\" focused=\"false\" scrollable=\"false\" long-clickable=\"false\" password=\"false\" selected=\"false\" bounds=\"[533,88][953,488]\"><node index=\"0\" text=\"\" resource-id=\"com.android.keyguard:id/view_flipper\" class=\"android.widget.ViewFlipper\" package=\"com.android.keyguard\" content-desc=\"\" checkable=\"false\" checked=\"false\" clickable=\"false\" enabled=\"true\" focusable=\"false\" focused=\"false\" scrollable=\"false\" long-clickable=\"false\" password=\"false\" selected=\"false\" bounds=\"[533,88][953,488]\"><node index=\"0\" text=\"\" resource-id=\"com.android.keyguard:id/keyguard_selector_view\" class=\"android.widget.LinearLayout\" package=\"com.android.keyguard\" content-desc=\"Slide unlock.\" checkable=\"false\" checked=\"false\" clickable=\"false\" enabled=\"true\" focusable=\"false\" focused=\"false\" scrollable=\"false\" long-clickable=\"false\" password=\"false\" selected=\"false\" bounds=\"[545,100][941,476]\"><node index=\"0\" text=\"\" resource-id=\"\" class=\"android.widget.FrameLayout\" package=\"com.android.keyguard\" content-desc=\"\" checkable=\"false\" checked=\"false\" clickable=\"false\" enabled=\"true\" focusable=\"false\" focused=\"false\" scrollable=\"false\" long-clickable=\"false\" password=\"false\" selected=\"false\" bounds=\"[545,100][941,476]\"><node index=\"0\" text=\"\" resource-id=\"com.android.keyguard:id/glow_pad_view\" class=\"android.view.View\" package=\"com.android.keyguard\" content-desc=\"Slide area.\" checkable=\"false\" checked=\"false\" clickable=\"false\" enabled=\"true\" focusable=\"false\" focused=\"false\" scrollable=\"false\" long-clickable=\"false\" password=\"false\" selected=\"false\" bounds=\"[545,100][941,476]\" /><node index=\"1\" text=\"Charging, 42%\" resource-id=\"com.android.keyguard:id/keyguard_message_area\" class=\"android.widget.TextView\" package=\"com.android.keyguard\" content-desc=\"\" checkable=\"false\" checked=\"false\" clickable=\"true\" enabled=\"true\" focusable=\"false\" focused=\"false\" scrollable=\"false\" long-clickable=\"false\" password=\"false\" selected=\"true\" bounds=\"[545,100][941,122]\" /><node NAF=\"true\" index=\"2\" text=\"\" resource-id=\"com.android.keyguard:id/keyguard_selector_fade_container\" class=\"android.widget.LinearLayout\" package=\"com.android.keyguard\" content-desc=\"\" checkable=\"false\" checked=\"false\" clickable=\"true\" enabled=\"true\" focusable=\"false\" focused=\"false\" scrollable=\"false\" long-clickable=\"false\" password=\"false\" selected=\"false\" bounds=\"[545,428][941,476]\" /><node index=\"3\" text=\"\" resource-id=\"com.android.keyguard:id/keyguard_selector_view_frame\" class=\"android.view.View\" package=\"com.android.keyguard\" content-desc=\"\" checkable=\"false\" checked=\"false\" clickable=\"false\" enabled=\"true\" focusable=\"false\" focused=\"false\" scrollable=\"false\" long-clickable=\"false\" password=\"false\" selected=\"false\" bounds=\"[561,100][925,476]\" /></node></node></node></node></node></node></node></hierarchy>";
+		DocumentBuilderFactory domFactory =	DocumentBuilderFactory.newInstance();
+		domFactory.setNamespaceAware(true);
+		DocumentBuilder builder = domFactory.newDocumentBuilder();
+		Document doc = builder.parse(new InputSource(new ByteArrayInputStream(uidump.getBytes("utf-8"))));
+		XPath xpath = XPathFactory.newInstance().newXPath();
+		XPathExpression expr = xpath.compile("//node[@clickable='true']");
+
+		Object result = expr.evaluate(doc, XPathConstants.NODESET);
+		NodeList nodes = (NodeList) result;
+		for (int j = 0; j < nodes.getLength(); j++) {
+		}
+
+		String bounds = nodes.item(0).getAttributes().getNamedItem("bounds").getNodeValue();
+		bounds = bounds.substring(1);
+		bounds = bounds.substring(0, bounds.indexOf("]"));
+		String x = bounds.split(",")[0];
+		String y = bounds.split(",")[1];
+
+		System.err.println("x=" + x + " , y=" + y);
+
+		Node node = new UiDumpXmlParser().parse(uidump);
+		new Printer(System.out).print(node);
+	}
+
+	@Test
+	public void clickables() throws Exception {
+		String uidump = "<?xml version='1.0' encoding='UTF-8' standalone='yes' ?><hierarchy rotation=\"0\"><node index=\"0\" text=\"\" resource-id=\"\" class=\"android.widget.FrameLayout\" package=\"de.komoot.android\" content-desc=\"\" checkable=\"false\" checked=\"false\" clickable=\"false\" enabled=\"true\" focusable=\"false\" focused=\"false\" scrollable=\"false\" long-clickable=\"false\" password=\"false\" selected=\"false\" bounds=\"[0,0][1080,1776]\"><node index=\"0\" text=\"Plan Tour\" resource-id=\"de.komoot.android:id/txt_title\" class=\"android.widget.TextView\" package=\"de.komoot.android\" content-desc=\"\" checkable=\"false\" checked=\"false\" clickable=\"false\" enabled=\"true\" focusable=\"false\" focused=\"false\" scrollable=\"false\" long-clickable=\"false\" password=\"false\" selected=\"false\" bounds=\"[0,75][1080,151]\" /><node index=\"1\" text=\"\" resource-id=\"android:id/list\" class=\"android.widget.ListView\" package=\"de.komoot.android\" content-desc=\"\" checkable=\"false\" checked=\"false\" clickable=\"true\" enabled=\"true\" focusable=\"true\" focused=\"true\" scrollable=\"false\" long-clickable=\"false\" password=\"false\" selected=\"false\" bounds=\"[0,151][1080,1596]\"><node index=\"0\" text=\"\" resource-id=\"de.komoot.android:id/layout_divider_item\" class=\"android.widget.ImageView\" package=\"de.komoot.android\" content-desc=\"\" checkable=\"false\" checked=\"false\" clickable=\"false\" enabled=\"false\" focusable=\"false\" focused=\"false\" scrollable=\"false\" long-clickable=\"false\" password=\"false\" selected=\"false\" bounds=\"[0,151][1080,154]\" /><node index=\"1\" text=\"\" resource-id=\"de.komoot.android:id/layout_planning_parameters_item\" class=\"android.widget.LinearLayout\" package=\"de.komoot.android\" content-desc=\"\" checkable=\"false\" checked=\"false\" clickable=\"true\" enabled=\"true\" focusable=\"false\" focused=\"false\" scrollable=\"false\" long-clickable=\"false\" password=\"false\" selected=\"false\" bounds=\"[0,157][1080,379]\"><node index=\"0\" text=\"Current Location\" resource-id=\"de.komoot.android:id/planning_parameter_value\" class=\"android.widget.TextView\" package=\"de.komoot.android\" content-desc=\"\" checkable=\"false\" checked=\"false\" clickable=\"false\" enabled=\"true\" focusable=\"false\" focused=\"false\" scrollable=\"false\" long-clickable=\"false\" password=\"false\" selected=\"false\" bounds=\"[207,201][629,277]\" /><node index=\"1\" text=\"Start\" resource-id=\"de.komoot.android:id/planning_parameter_label\" class=\"android.widget.TextView\" package=\"de.komoot.android\" content-desc=\"\" checkable=\"false\" checked=\"false\" clickable=\"false\" enabled=\"true\" focusable=\"false\" focused=\"false\" scrollable=\"false\" long-clickable=\"false\" password=\"false\" selected=\"false\" bounds=\"[207,277][298,334]\" /></node><node index=\"2\" text=\"\" resource-id=\"de.komoot.android:id/layout_planning_parameters_item\" class=\"android.widget.LinearLayout\" package=\"de.komoot.android\" content-desc=\"\" checkable=\"false\" checked=\"false\" clickable=\"true\" enabled=\"true\" focusable=\"false\" focused=\"false\" scrollable=\"false\" long-clickable=\"false\" password=\"false\" selected=\"false\" bounds=\"[0,382][1080,604]\"><node index=\"0\" text=\"Choose a destination\" resource-id=\"de.komoot.android:id/planning_parameter_value\" class=\"android.widget.TextView\" package=\"de.komoot.android\" content-desc=\"\" checkable=\"false\" checked=\"false\" clickable=\"false\" enabled=\"true\" focusable=\"false\" focused=\"false\" scrollable=\"false\" long-clickable=\"false\" password=\"false\" selected=\"false\" bounds=\"[207,455][739,531]\" /></node><node index=\"3\" text=\"\" resource-id=\"de.komoot.android:id/layout_planning_parameters_item\" class=\"android.widget.LinearLayout\" package=\"de.komoot.android\" content-desc=\"\" checkable=\"false\" checked=\"false\" clickable=\"true\" enabled=\"true\" focusable=\"false\" focused=\"false\" scrollable=\"false\" long-clickable=\"false\" password=\"false\" selected=\"false\" bounds=\"[0,607][1080,829]\"><node index=\"0\" text=\"Hiking\" resource-id=\"de.komoot.android:id/planning_parameter_value\" class=\"android.widget.TextView\" package=\"de.komoot.android\" content-desc=\"\" checkable=\"false\" checked=\"false\" clickable=\"false\" enabled=\"true\" focusable=\"false\" focused=\"false\" scrollable=\"false\" long-clickable=\"false\" password=\"false\" selected=\"false\" bounds=\"[207,651][368,727]\" /><node index=\"1\" text=\"Sport Type\" resource-id=\"de.komoot.android:id/planning_parameter_label\" class=\"android.widget.TextView\" package=\"de.komoot.android\" content-desc=\"\" checkable=\"false\" checked=\"false\" clickable=\"false\" enabled=\"true\" focusable=\"false\" focused=\"false\" scrollable=\"false\" long-clickable=\"false\" password=\"false\" selected=\"false\" bounds=\"[207,727][411,784]\" /></node><node index=\"4\" text=\"\" resource-id=\"de.komoot.android:id/layout_planning_parameters_item\" class=\"android.widget.LinearLayout\" package=\"de.komoot.android\" content-desc=\"\" checkable=\"false\" checked=\"false\" clickable=\"true\" enabled=\"true\" focusable=\"false\" focused=\"false\" scrollable=\"false\" long-clickable=\"false\" password=\"false\" selected=\"false\" bounds=\"[0,832][1080,1054]\"><node index=\"0\" text=\"In Good Shape\" resource-id=\"de.komoot.android:id/planning_parameter_value\" class=\"android.widget.TextView\" package=\"de.komoot.android\" content-desc=\"\" checkable=\"false\" checked=\"false\" clickable=\"false\" enabled=\"true\" focusable=\"false\" focused=\"false\" scrollable=\"false\" long-clickable=\"false\" password=\"false\" selected=\"false\" bounds=\"[207,876][576,952]\" /><node index=\"1\" text=\"Fitness Level\" resource-id=\"de.komoot.android:id/planning_parameter_label\" class=\"android.widget.TextView\" package=\"de.komoot.android\" content-desc=\"\" checkable=\"false\" checked=\"false\" clickable=\"false\" enabled=\"true\" focusable=\"false\" focused=\"false\" scrollable=\"false\" long-clickable=\"false\" password=\"false\" selected=\"false\" bounds=\"[207,952][452,1009]\" /></node></node><node index=\"2\" text=\"Plan Tour\" resource-id=\"de.komoot.android:id/btn_commit\" class=\"android.widget.Button\" package=\"de.komoot.android\" content-desc=\"\" checkable=\"false\" checked=\"false\" clickable=\"true\" enabled=\"true\" focusable=\"true\" focused=\"false\" scrollable=\"false\" long-clickable=\"false\" password=\"false\" selected=\"false\" bounds=\"[304,1614][776,1758]\" /></node></hierarchy>";
+		Node node = new UiDumpXmlParser().parse(uidump);
+		new Printer(System.out).print(node);
+		List<Selector> selectors = filterClickableElements(node);
+		for(Selector selector : selectors) {
+			System.out.println(selector.getPath().getLast().getAttributes().get("resource-id"));
+		}
+	}
+
+	private List<Selector> filterClickableElements(Node node) {
+		List<Selector> selectors = new ArrayList<>();
+		filterClickableElements(node, selectors);
+		return selectors;
+	}
+
+	private void filterClickableElements(Node node, List<Selector> selectors) {
+		Element element = node.getElement();
+		if(element.isClickable()) {
+			selectors.add(new Selector(element));
+		}
+
+		for(Node child : node.getChilds()) {
+			filterClickableElements(child, selectors);
+		}
+	}
+}
