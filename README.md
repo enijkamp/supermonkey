@@ -7,7 +7,7 @@ Here's a video of how it works: https://www.youtube.com/watch?v=KCCxAIE2tts
 
 If you have any question or want to collaborate, feel free to contact erik.nijkamp@gmail.com.
 
-[![GUI Crawler](https://raw.githubusercontent.com/wiki/testobject/supermonkey/crawler.png)](http://www.youtube.com/watch?v=KCCxAIE2tts)
+[![GUI crawler](https://img.youtube.com/vi/CCxAIE2tts/0.jpg)](https://www.youtube.com/watch?v=CCxAIE2tts)
 
 
 Credits
